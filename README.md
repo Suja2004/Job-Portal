@@ -44,7 +44,7 @@ A full-stack web-based job application system built using **PHP**, **MySQL**, an
 ---
 
 ## 📁 Project Structure
-
+<pre>
 job-portal/
 ├── admin/
 │ ├── login.php
@@ -58,7 +58,6 @@ job-portal/
 ├── applications/
 │ ├── apply.php
 │ └── submit_application.php
-
 ├── includes/
 │ ├── db.php
 │ ├── functions.php
@@ -66,10 +65,10 @@ job-portal/
 │ └── [Uploaded PDF resumes]
 ├── .env.php
 ├── database.sql
-│ ├── index.php
-│ └── job_detail.php
+│── index.php
+│── job_detail.php
 └── README.md
-
+</pre>
 
 ---
 
