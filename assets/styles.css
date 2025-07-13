@@ -1,0 +1,104 @@
+body {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.header {
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  & h1 {
+    color: #3cf;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
+      sans-serif;
+  }
+}
+
+.filter-form {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  margin: auto;
+  padding: 1rem;
+  & a {
+    color: #222;
+  }
+}
+
+.header p,
+.filter-form input,
+.filter-form button {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.filter-form button:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.job-item {
+  border: 1px solid #ccc;
+  padding: 1rem 2rem 2rem;
+  margin: 10px 0;
+  background-color: #e9ecef;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.job-item .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.job-item h2 {
+  color: #22ff00;
+}
+
+.job-item .title p {
+  color: rgb(8, 0, 255);
+}
+
+.job-item:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-item a:hover {
+  border-bottom: 2px solid #007bff;
+}
+
+.pagination {
+  text-align: center;
+  padding: 1rem;
+}

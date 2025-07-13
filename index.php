@@ -5,7 +5,8 @@ require './includes/db.php';
 $location = $_GET['location'] ?? '';
 $salary = $_GET['salary'] ?? '';
 $keyword = $_GET['keyword'] ?? '';
-$limit = 5;
+$deadline = $_GET['deadline'] ?? '';
+$limit = 8;
 $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
 $offset = ($page - 1) * $limit;
 
@@ -48,53 +49,60 @@ $total_pages = ceil($total_jobs / $limit);
 <html>
 
 <head>
-    <title>Job Listings</title>
+    <title>Job Portal</title>
+    <link rel="stylesheet" href="./assets/styles.css">
 </head>
 
 <body>
-    <h1>Available Jobs</h1>
-    <p>
-        <a href="./admin/login.php">
-            <button>Post a Job</button>
-        </a>
-    </p>
+    <div class="header">
+        <h1>JobNest</h1>
+        <p>
+            <a href="./admin/dashboard.php">
+                Post a Job
+            </a>
+        </p>
+    </div>
 
-    <form method="GET">
+    <form method="GET" class="filter-form">
         <input type="text" name="location" placeholder="Location" value="<?= htmlspecialchars($location) ?>">
         <input type="number" name="salary" placeholder="Minimum Salary" value="<?= htmlspecialchars($salary) ?>">
         <input type="text" name="keyword" placeholder="Keyword" value="<?= htmlspecialchars($keyword) ?>">
         <button type="submit">Filter</button>
-        <a href="index.php">Reset</a>
+        <button><a href="index.php">Reset</a></button>
     </form>
 
     <br>
-
-    <?php if ($result->num_rows === 0): ?>
-        <p>No jobs found.</p>
-    <?php else: ?>
-        <?php while ($job = $result->fetch_assoc()): ?>
-            <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
-                <h2><?= htmlspecialchars($job['title']) ?></h2>
-                <p><strong>Location:</strong> <?= htmlspecialchars($job['location']) ?></p>
-                <p><strong>Salary:</strong> <?= htmlspecialchars($job['salary']) ?></p>
-                <p><strong>Skills:</strong> <?= htmlspecialchars($job['skills']) ?></p>
-                <p><?= nl2br(htmlspecialchars(substr($job['description'], 0, 150))) ?>...</p>
-                <a href="job_detail.php?id=<?= $job['id'] ?>">View Details & Apply</a>
-            </div>
-        <?php endwhile; ?>
-        <?php if ($total_pages > 1): ?>
-            <div style="margin-top:20px;">
-                <?php if ($page > 1): ?>
-                    <a href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])) ?>">← Prev</a>
-                <?php endif; ?>
-                Page <?= $page ?> of <?= $total_pages ?>
-                <?php if ($page < $total_pages): ?>
-                    <a href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])) ?>">Next →</a>
-                <?php endif; ?>
-            </div>
-        <?php endif; ?>
-
+    <div class="job-list">
+        <?php if ($result->num_rows === 0): ?>
+            <p>No jobs found.</p>
+        <?php else: ?>
+            <?php while ($job = $result->fetch_assoc()): ?>
+                <div class="job-item">
+                    <div class="title">
+                        <h2><?= htmlspecialchars($job['title']) ?></h2>
+                        <p><?= date("d M Y", strtotime($job['deadline'])) ?></p>
+                    </div>
+                    <p><strong>Location:</strong> <?= htmlspecialchars($job['location']) ?></p>
+                    <p><strong>Salary:</strong> <?= htmlspecialchars($job['salary']) ?></p>
+                    <p><strong>Skills:</strong> <?= htmlspecialchars($job['skills']) ?></p>
+                    <p><?= nl2br(htmlspecialchars(substr($job['description'], 0, 100))) ?>...</p>
+                    <a href="job_detail.php?id=<?= $job['id'] ?>">View Details & Apply</a>
+                </div>
+            <?php endwhile; ?>
+    </div>
+    <?php if ($total_pages > 1): ?>
+        <div class="pagination">
+            <?php if ($page > 1): ?>
+                <a href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])) ?>">← Prev</a>
+            <?php endif; ?>
+            Page <?= $page ?> of <?= $total_pages ?>
+            <?php if ($page < $total_pages): ?>
+                <a href="?<?= http_build_query(array_merge($_GET, ['page' => $page + 1])) ?>">Next →</a>
+            <?php endif; ?>
+        </div>
     <?php endif; ?>
+
+<?php endif; ?>
 </body>
 
 </html>
