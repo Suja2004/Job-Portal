@@ -39,8 +39,6 @@ A full-stack web-based job application system built using **PHP**, **MySQL**, an
 - **Backend**: PHP (Native)
 - **Database**: MySQL / MariaDB
 - **Frontend**: HTML, CSS, JavaScript
-- **UI Styling**: Basic (You can use Bootstrap or Tailwind optionally)
-
 ---
 
 ## 📁 Project Structure
@@ -76,7 +74,7 @@ job-portal/
 
 ## 🧪 Setup Instructions
 
-1. **Install XAMPP / LAMP / WAMP**
+1. **Install XAMPP**
 2. **Import the Database**
    - Open phpMyAdmin
    - Create a DB named `job_portal`
@@ -96,18 +94,10 @@ job-portal/
 
 4. **Launch**
    - Open your browser and go to:  
-     `http://localhost/job-portal/public/index.php`
+     `http://localhost/job-portal/index.php`
    - Admin Panel:  
      `http://localhost/job-portal/admin/login.php`  
      (Username: `admin`, Password: `admin123`)
-
----
-
-## 🐛 Known Issues (if any)
-
-- Minimal validation on client side (recommended to enhance)
-- File upload path is relative; adjust for deployment
-- Admin login is not secure (hardcoded, use sessions only)
 
 ---
 
