@@ -47,17 +47,19 @@ A full-stack web-based job application system built using **PHP**, **MySQL**, an
 <pre>
 job-portal/
 ├── admin/
-│ ├── login.php
-│ ├── dashboard.php
 │ ├── add_job.php
-│ ├── edit_job.php
+│ ├── dashboard.php
 │ ├── delete_job.php
-│ ├── view_applicants.php
+│ ├── edit_job.php
 │ ├── export_csv.php
-│ └── logout.php
+│ ├── login.php
+│ |── logout.php
+│ └── view_applicants.php
 ├── applications/
 │ ├── apply.php
 │ └── submit_application.php
+├── assets/
+│ └── styles.css
 ├── includes/
 │ ├── db.php
 │ ├── functions.php
