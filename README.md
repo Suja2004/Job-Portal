@@ -130,6 +130,13 @@ job-portal/
 - ⚠ **No email confirmation or notifications**  
   Application and admin actions are not linked to any email system.
 
+---
+
+## 🖼 Preview
+
+![JobNest Screenshot](./assets/JobNest.jpeg)
+
+---
 
 ## 👏 Credits
 
