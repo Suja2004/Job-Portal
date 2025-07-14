@@ -20,16 +20,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <head>
     <title>Admin Login</title>
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
 
 <body>
-    <h2>Admin Login</h2>
-    <?php if ($error) echo "<p style='color:red;'>$error</p>"; ?>
-    <form method="POST">
-        <input name="username" placeholder="Username" required><br><br>
-        <input name="password" type="password" placeholder="Password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
+    <div class="loginPage">
+
+        <div class="header">
+            <?php include '../includes/logo.php'; ?>
+        </div>
+        <form method="POST" class="loginForm">
+            <h2>Admin Login</h2>
+            <?php if ($error) echo "<p style='color:red;'>$error</p>"; ?>
+            <input name="username" placeholder="Username" required><br><br>
+            <input name="password" type="password" placeholder="Password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
 </body>
 
 </html>

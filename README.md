@@ -1,47 +1,45 @@
-# 🧑‍💼 Job Application Portal
+# 🧑‍💼 JobNest — Job Application Portal
 
-A full-stack web-based job application system built using **PHP**, **MySQL**, and **JavaScript**. It allows **admins** to post and manage job listings, and **applicants** to view and apply for jobs by uploading their resumes.
+**JobNest** is a complete full-stack job application system built using **PHP**, **MySQL**, and **JavaScript**, designed for internships, college placements, and entry-level job listings. It supports both public job browsing and admin job management.
 
 ---
 
-## 🚀 Features Implemented
+## 🚀 Features
 
 ### 👤 Admin Panel
-- Hardcoded admin login system
-- Add, Edit, Delete job listings
+- Admin login/logout
+- Add, edit, and delete jobs
 - Toggle job status (Open/Closed)
 - View applicants for each job
-- Download resumes (PDF)
-- Export applicant data to CSV
-- Applicant count per job (visible in dashboard)
+- Download applicant resumes (PDF)
+- Export applicants as CSV
+- See applicant counts for each job
+- Sort applicants by application date (ASC/DESC)
 
-### 🌐 Public Job Listing Page
+### 🌐 Public Job Listing
 - Filter jobs by:
-  - Location
-  - Minimum salary
-  - Keyword (title, description, skills)
+  - **Location**
+  - **Minimum Salary**
+  - **Keyword** (in title, description, or skills)
 - View job details
-- Pagination for job listings
+- Paginated job list (8 per page)
+- Responsive design with mobile support
 
 ### 📝 Application Form
-- Apply to a job with:
-  - Full Name
+- Apply to jobs with:
+  - Full name
   - Email (unique per job)
-  - Phone
-  - Resume Upload (PDF only)
-- Prevents duplicate applications (same email + job)
-- AJAX-based form submission (no page reload)
+  - Phone number
+  - Resume upload (PDF)
+- Form submission via AJAX (no page reload)
+- Duplicate application prevention
+- Email shown as `mailto:` link
 
----
-
-## 🛠 Tech Stack
-
-- **Backend**: PHP (Native)
-- **Database**: MySQL / MariaDB
-- **Frontend**: HTML, CSS, JavaScript
 ---
 
 ## 📁 Project Structure
+
+
 <pre>
 job-portal/
 ├── admin/
@@ -61,6 +59,7 @@ job-portal/
 ├── includes/
 │ ├── db.php
 │ ├── functions.php
+| └── logo.php
 ├── resumes/
 │ └── [Uploaded PDF resumes]
 ├── .env.php
@@ -69,6 +68,16 @@ job-portal/
 │── job_detail.php
 └── README.md
 </pre>
+
+---
+
+## 🛠 Tech Stack
+
+- **Backend**: PHP (MySQLi)
+- **Database**: MySQL / MariaDB
+- **Frontend**: HTML5, CSS3, JavaScript
+- **AJAX**: Used for application form
+- **Security**: Prepared statements, basic session auth
 
 ---
 
@@ -100,6 +109,27 @@ job-portal/
      (Username: `admin`, Password: `admin123`)
 
 ---
+
+## 🐛 Known Issues
+
+- ⚠ **Admin login uses plain text validation**  
+  Passwords are not hashed and there's no multi-user or role-based admin system.
+
+- ⚠ **Salary stored as a single numeric value**  
+  Only `salary_min` is supported; no `salary_max` or salary range filters yet.
+
+- ⚠ **Resume upload lacks file size validation**  
+  Only file type is checked (`.pdf`), but file size limit is not enforced.
+
+- ⚠ **Applicant identity is email-only**  
+  There is no login or applicant tracking system. Duplicate applications are blocked only by email + job ID.
+
+- ⚠ **Mobile table usability**  
+  Tables require horizontal scroll on smaller screens; no collapsible or stacked mobile layout.
+
+- ⚠ **No email confirmation or notifications**  
+  Application and admin actions are not linked to any email system.
+
 
 ## 👏 Credits
 

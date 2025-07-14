@@ -10,18 +10,28 @@ $job = $conn->query("SELECT * FROM jobs WHERE id=$job_id")->fetch_assoc();
 
 <head>
     <title>Apply - <?= htmlspecialchars($job['title']) ?></title>
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
 
 <body>
-    <h2>Apply for <?= htmlspecialchars($job['title']) ?></h2>
-    <form id="applyForm" method="POST" enctype="multipart/form-data">
+
+    <form class="applyForm" id="applyForm" method="POST" enctype="multipart/form-data">
+        <h2>Apply for <?= htmlspecialchars($job['title']) ?> Position</h2>
         <input type="hidden" name="job_id" value="<?= $job_id ?>">
-        <input name="full_name" placeholder="Full Name" required><br><br>
-        <input name="email" type="email" placeholder="Email" required><br><br>
-        <input name="phone" placeholder="Phone" required><br><br>
-        <input type="file" name="resume" accept="application/pdf" required><br><br>
-        <button type="submit">Submit Application</button>
+        <input name="full_name" placeholder="Full Name" required>
+        <input name="email" type="email" placeholder="Email" required>
+        <input name="phone" placeholder="Phone" required>
+        <div class="file-input">
+            <label for="resume-upload" class="custom-file-label">Upload Resume (PDF)</label>
+            <input type="file" id="resume-upload" name="resume" accept="application/pdf" required>
+        </div>
+        <div class="form-actions">
+            <button type="button" onclick="window.history.back()">Cancel</button>
+            <button type="submit">Submit Application</button>
+        </div>
+
     </form>
+
     <script>
         document.getElementById("applyForm").addEventListener("submit", function(e) {
             e.preventDefault();
@@ -33,8 +43,8 @@ $job = $conn->query("SELECT * FROM jobs WHERE id=$job_id")->fetch_assoc();
                     body: formData
                 }).then(res => res.text())
                 .then(data => {
-                    alert(data); // or use a modal
-                    form.reset(); // clear form
+                    alert(data);
+                    form.reset();
                 }).catch(err => {
                     alert("Submission failed.");
                     console.error(err);

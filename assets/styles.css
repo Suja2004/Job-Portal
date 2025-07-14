@@ -4,15 +4,17 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #f9f9f9;
+  font-family: sans-serif;
 }
 
 ::-webkit-scrollbar {
   width: 5px;
   background: #000;
 }
+
 ::-webkit-scrollbar-thumb {
-    background: #fff;
+  background: #fff;
 }
 
 a {
@@ -24,12 +26,15 @@ a {
   padding: 0 1.5rem;
   display: flex;
   justify-content: space-between;
+  background: #fff;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  & h1 {
-    color: #3cf;
-    font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial,
-      sans-serif;
+  & h1 a {
+    color: transparent;
+    background-image: linear-gradient(45deg, #007bff, #00ff00, #0000ff);
+    background-clip: text;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial;
+    user-select: none;
   }
 }
 
@@ -45,16 +50,21 @@ a {
 }
 
 .header p,
+.add-job-link,
 .filter-form input,
 .filter-form button {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 0.5rem;
+  transition: background-color 0.5s ease;
 }
 
 .filter-form button:hover {
   background-color: #007bff;
   color: white;
+  & a {
+    color: white;
+  }
 }
 
 .job-list {
@@ -68,10 +78,9 @@ a {
   border: 1px solid #ccc;
   padding: 1rem 2rem 2rem;
   margin: 10px 0;
-  background-color: #e9ecef;
+  background-color: #fff;
   border-radius: 1rem;
   transition: all 0.3s ease;
-  user-select: none;
 }
 
 .job-item .title {
@@ -89,7 +98,6 @@ a {
 }
 
 .job-item:hover {
-  background-color: #f9f9f9;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -101,4 +109,291 @@ a {
 .pagination {
   text-align: center;
   padding: 1rem;
+}
+
+/* Job Details Page */
+.return-link {
+  display: block;
+  margin: 1rem;
+  color: #007bff;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(300px, 1fr));
+  grid-template-areas:
+    "details apply"
+    "description description";
+  gap: 1rem;
+}
+
+#job-details {
+  grid-area: details;
+}
+#apply-section {
+  grid-area: apply;
+}
+#description-section {
+  grid-area: description;
+}
+
+.details {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 2rem;
+  & h1 {
+    color: #22ff00;
+  }
+}
+
+.apply {
+  text-align: center;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 1rem;
+  & h2 {
+    color: #007bff;
+  }
+  & button {
+    padding: 1rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+  }
+}
+
+.description {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 2rem;
+  grid-column: 1 / -1;
+  & h2 {
+    color: #007bff;
+  }
+}
+
+.details-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+}
+
+/* Apply Form Page */
+.applyForm,
+.loginForm,
+.addJobForm,
+.editJobForm {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem 1rem;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  & h2 {
+    color: #3cf;
+  }
+}
+
+.applyForm input,
+.loginForm input,
+.addJobForm input,
+.addJobForm textarea,
+.editJobForm input,
+.editJobForm textarea {
+  width: 400px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+.file-input {
+  width: 400px;
+  padding: 1rem;
+  margin: 1rem auto;
+  border: 2px dashed #22ff00;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  & input {
+    width: 50%;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+  }
+}
+
+.applyForm .form-actions,
+.addJobForm .form-actions,
+.editJobForm .form-actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.applyForm button,
+.loginForm button,
+.addJobForm button,
+.editJobForm button {
+  padding: 1rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* Login Page */
+.loginPage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.loginForm {
+  padding: 2rem;
+  height: 400px;
+}
+
+.loginForm button {
+  width: 435px;
+  font-size: 1.15rem;
+}
+
+/* Admin Dashboard */
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.top-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.add-job-link {
+  width: fit-content;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.job-table,
+.applicant-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.job-table thead,
+.applicant-table thead {
+  background-image: linear-gradient(to left, #57a0ee, #29a8ac);
+  color: white;
+}
+
+.job-table th,
+.job-table td,
+.applicant-table th,
+.applicant-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.job-table tbody tr:hover,
+.applicant-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.job-table td.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.job-table td a:nth-child(1) {
+  color: #22ff00;
+}
+
+.job-table td a:nth-child(2) {
+  color: #ff0000;
+}
+
+/* Add Job */
+.addJobPage,
+.editJobPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.short-inputs,
+.date-input,
+.status {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 2rem;
+  gap: 1rem;
+}
+
+.short-inputs input {
+  width: 150px;
+}
+
+.date-input input,
+.status select {
+  width: 250px;
+}
+
+/* Edit Job */
+.editJobForm select {
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+  .filter-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "details"
+      "description"
+      "apply";
+    padding: 0 1rem 2rem 1rem;
+  }
+
+  .details,
+  .apply,
+  .description {
+    grid-column: 1 / -1;
+  }
+
+  .file-input {
+    width: 90%;
+  }
 }

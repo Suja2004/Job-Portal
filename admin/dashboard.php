@@ -4,7 +4,6 @@ if (!isset($_SESSION['admin'])) {
     header('Location: login.php');
     exit;
 }
-
 require '../includes/db.php';
 require '../includes/functions.php';
 require_admin();
@@ -25,35 +24,54 @@ while ($row = $counts_result->fetch_assoc()) {
 
 <head>
     <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
 
 <body>
-    <h2>Job Listings</h2>
-    <a href="add_job.php">Add New Job</a> | <a href="logout.php">Logout</a>
-    <table border="1" cellpadding="8">
-        <tr>
-            <th>Title</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th>Deadline</th>
-            <th>Actions</th>
-        </tr>
-        <?php while ($row = $result->fetch_assoc()): ?>
-            <tr>
-                <td><?= htmlspecialchars($row['title']) ?></td>
-                <td><?= htmlspecialchars($row['location']) ?></td>
-                <td><?= $row['status'] ?></td>
-                <td><?= $row['deadline'] ?></td>
-                <td>
-                    <a href="edit_job.php?id=<?= $row['id'] ?>">Edit</a> |
-                    <a href="delete_job.php?id=<?= $row['id'] ?>" onclick="return confirm('Delete this job?')">Delete</a> |
-                    <a href="view_applicants.php?id=<?= $row['id'] ?>">
-                        Applicants (<?= $applicant_counts[$row['id']] ?? 0 ?>)
-                    </a>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+    <div class="header">
+        <?php include '../includes/logo.php'; ?>
+        <a href="logout.php">Logout</a>
+    </div>
+    <div class="dashboard">
+        <div class="top-section">
+            <h2 class="title">Admin Dashboard</h2>
+            <a href="add_job.php" class="add-job-link">Add New Job</a>
+        </div>
+
+        <div class="table-wrapper">
+            <table class="job-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Location</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result->fetch_assoc()): ?>
+                        <tr>
+                            <td><?= htmlspecialchars($row['title']) ?></td>
+                            <td><?= htmlspecialchars($row['location']) ?></td>
+                            <td><?= $row['status'] ?></td>
+                            <td><?= date("d M Y", strtotime($row['deadline'])) ?></td>
+                            <td class="actions">
+                                <a href="edit_job.php?id=<?= $row['id'] ?>" title="Edit">📝</a>
+                                <a href="delete_job.php?id=<?= $row['id'] ?>" onclick="return confirm('Delete this job?')" title="Delete">🗑️</a>
+                                <a href="view_applicants.php?id=<?= $row['id'] ?>" title="View Applicants">
+                                    👁️ (<?= $applicant_counts[$row['id']] ?? 0 ?>)
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
 </body>
 
 </html>

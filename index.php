@@ -18,9 +18,10 @@ if ($location !== '') {
     $params[] = "%$location%";
 }
 if ($salary !== '') {
-    $sql .= " AND salary >= ?";
-    $params[] = $salary;
+    $sql .= " AND salary_min >= ?";
+    $params[] = (int)$salary;
 }
+
 if ($keyword !== '') {
     $sql .= " AND (title LIKE ? OR description LIKE ? OR skills LIKE ?)";
     $params[] = "%$keyword%";
@@ -55,7 +56,7 @@ $total_pages = ceil($total_jobs / $limit);
 
 <body>
     <div class="header">
-        <h1>JobNest</h1>
+        <?php include './includes/logo.php'; ?>
         <p>
             <a href="./admin/dashboard.php">
                 Post a Job
@@ -67,8 +68,10 @@ $total_pages = ceil($total_jobs / $limit);
         <input type="text" name="location" placeholder="Location" value="<?= htmlspecialchars($location) ?>">
         <input type="number" name="salary" placeholder="Minimum Salary" value="<?= htmlspecialchars($salary) ?>">
         <input type="text" name="keyword" placeholder="Keyword" value="<?= htmlspecialchars($keyword) ?>">
-        <button type="submit">Filter</button>
-        <button><a href="index.php">Reset</a></button>
+        <div class="filter-buttons">
+            <button type="submit">Filter</button>
+            <button><a href="/index.php">Reset</a></button>
+        </div>
     </form>
 
     <br>
@@ -83,9 +86,8 @@ $total_pages = ceil($total_jobs / $limit);
                         <p><?= date("d M Y", strtotime($job['deadline'])) ?></p>
                     </div>
                     <p><strong>Location:</strong> <?= htmlspecialchars($job['location']) ?></p>
-                    <p><strong>Salary:</strong> <?= htmlspecialchars($job['salary']) ?></p>
+                    <p><strong>Salary:</strong> ₹<?= number_format($job['salary_min']) ?></p>
                     <p><strong>Skills:</strong> <?= htmlspecialchars($job['skills']) ?></p>
-                    <p><?= nl2br(htmlspecialchars(substr($job['description'], 0, 100))) ?>...</p>
                     <a href="job_detail.php?id=<?= $job['id'] ?>">View Details & Apply</a>
                 </div>
             <?php endwhile; ?>
